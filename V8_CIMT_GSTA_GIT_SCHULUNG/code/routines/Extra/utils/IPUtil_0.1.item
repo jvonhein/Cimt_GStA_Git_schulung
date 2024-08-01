@@ -1,0 +1,46 @@
+package routines;
+
+import routines.system.JSONObject;
+import javax.servlet.http.HttpServletRequest;
+
+
+//http.HttpServletRequest;
+
+public class IPUtil {
+	/**
+     * {talendTypes} JSONObject
+     * 
+     * {Category} IPUtil
+     * 
+     * {param} HttpServletRequest(httpServletRequest) httpServletRequest
+     * {example} getIpAddressObject(httpServletRequest) {"remote_addr": "192.168.100.7"}
+     * @throws Exception 
+     */
+	
+	  public static JSONObject getIpAddressObject(HttpServletRequest httpServletRequest) throws Exception {
+	    	
+		  JSONObject jsonObject = new JSONObject();
+		  // get IP from header:
+		  String[] IP_HEADER_CANDIDATES = {
+		              "X-Forwarded-For",
+		              "Proxy-Client-IP",
+		              "WL-Proxy-Client-IP",
+		              "HTTP_X_FORWARDED_FOR",
+		              "HTTP_X_FORWARDED",
+		              "HTTP_X_CLUSTER_CLIENT_IP",
+		              "HTTP_CLIENT_IP",
+		              "HTTP_FORWARDED_FOR",
+		              "HTTP_FORWARDED",
+		              "HTTP_VIA",
+		              "REMOTE_ADDR" };
+		  for(String header : IP_HEADER_CANDIDATES){
+		  	//jsonObject.put("header_" + header.toLowerCase(), StringUtil.isEmpty(httpServletRequest.getHeader(header))? JSONObject.NULL : httpServletRequest.getHeader(header));
+			  jsonObject.put("header_" + header.toLowerCase(), httpServletRequest.getHeader(header));
+		  }
+		  // RemoteAddr()
+		  //jsonObject.put("remote_addr", StringUtil.isEmpty(httpServletRequest.getRemoteAddr())? JSONObject.NULL : httpServletRequest.getRemoteAddr());
+		  jsonObject.put("remote_addr", httpServletRequest.getRemoteAddr());
+		 
+		  return jsonObject;
+	    }
+}

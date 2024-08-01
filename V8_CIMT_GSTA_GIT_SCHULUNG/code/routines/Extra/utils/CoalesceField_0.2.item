@@ -1,0 +1,414 @@
+package routines;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class CoalesceField {
+
+	  /**
+	   * Default values: when a field is missing, a default value is defined for each field type
+	   * Supported types: String, Integer, Long, Date
+	   */
+	private static final String NO_VALUE_STRING = "#NOVALUE#";
+	private static final Integer NO_VALUE_INT = Integer.MAX_VALUE;  //2147483647
+	private static final Long NO_VALUE_LONG = Long.MAX_VALUE;  //9223372036854775807L
+	private static final Double NO_VALUE_DOUBLE = Double.MAX_VALUE;  //9223372036854775807L
+	private static final Date NO_VALUE_DATE = new Date(Long.MAX_VALUE);
+	private static final BigDecimal NO_VALUE_BIGDECIMAL = new BigDecimal(Long.MAX_VALUE);
+	
+    /**
+  	 *  
+  	 * {Category} CoalesceField
+  	 * {talendTypes} String
+  	 * {param} String(oldValue) oldValue
+  	 * {param} String(newValue) newValue
+  	 * {example} coalesce(oldValue, newValue)
+  	 * 
+  	 */
+    public static String coalesce(String oldValue, String newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_STRING, true);
+    }
+
+    /**
+  	 *  
+  	 * {Category} CoalesceField
+  	 * {talendTypes} String
+  	 * {param} String(oldValue) oldValue
+  	 * {param} String(newValue) newValue
+  	 * {example} coalesce(oldValue, newValue)
+  	 * 
+  	 */
+    public static String coalesce(String oldValue, String newValue, Boolean parentExists) {
+    	return coalesce(oldValue, newValue, NO_VALUE_STRING, parentExists);
+    }
+    
+    /**
+  	 *  
+  	 * {Category} CoalesceField
+  	 * {talendTypes} String
+  	 * {param} String(oldValue) oldValue
+  	 * {param} String(newValue) newValue
+  	 * {example} coalesce(oldValue, newValue)
+  	 * 
+  	 */
+    public static Boolean coalesce(Boolean oldValue, String newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_STRING);
+    }
+
+    /**
+   	 *  
+   	 * {Category} CoalesceField
+   	 * {talendTypes} Integer
+   	 * {param} Integer(oldValue) oldValue
+   	 * {param} Integer(newValue) newValue
+   	 * {example} coalesce(oldValue, newValue)
+   	 * 
+   	 */
+    public static Integer coalesce(Integer oldValue, Integer newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_INT, true);
+    }
+
+    /**
+   	 *  
+   	 * {Category} CoalesceField
+   	 * {talendTypes} Integer
+   	 * {param} Integer(oldValue) oldValue
+   	 * {param} Integer(newValue) newValue
+   	 * {param} Boolean(parentExist) parentExist
+   	 * {example} coalesce(oldValue, newValue, parentExist)
+   	 * 
+   	 */
+    public static Integer coalesce(Integer oldValue, Integer newValue, Boolean parentExist) {
+    	return coalesce(oldValue, newValue, NO_VALUE_INT, parentExist);
+    }
+    
+    /**
+   	 *  
+   	 * {Category} CoalesceField
+   	 * {talendTypes} BigDecimal
+   	 * {param} BigDecimal(oldValue) oldValue
+   	 * {param} BigDecimal(newValue) newValue
+   	 * {example} coalesce(oldValue, newValue)
+   	 * 
+   	 */
+    public static BigDecimal coalesce(BigDecimal oldValue, BigDecimal newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_BIGDECIMAL);
+    }
+
+    /**
+   	 *  
+   	 * {Category} CoalesceField
+   	 * {talendTypes} Double
+   	 * {param} Double(oldValue) oldValue
+   	 * {param} Double(newValue) newValue
+   	 * {example} coalesce(oldValue, newValue)
+   	 * 
+   	 */
+    public static Double coalesce(Double oldValue, Double newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_DOUBLE);
+    }
+
+    /**
+   	 *  
+   	 * {Category} CoalesceField
+   	 * {talendTypes} Long
+   	 * {param} Long(oldValue) oldValue
+   	 * {param} Long(newValue) newValue
+   	 * {example} coalesce(oldValue, newValue)
+   	 * 
+   	 */
+    public static Long coalesce(Long oldValue, Long newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_LONG);
+    }
+    
+    /**
+  	 *  
+  	 * {Category} CoalesceField
+  	 * {talendTypes} Date
+  	 * {param} Date(oldValue) oldValue
+  	 * {param} Date(newValue) newValue
+  	 * {example} coalesce(oldValue, newValue)
+  	 * 
+  	 */
+    public static Date coalesce(Date oldValue, Date newValue) {
+    	return coalesce(oldValue, newValue, NO_VALUE_DATE);
+    }
+    
+    /**
+	 *  
+	 * {Category} CoalesceField
+	 * {talendTypes} String
+	 * {param} String(oldValue) oldValue
+	 * {param} String(newValue) newValue
+	 * {param} String(noValue) noValue
+	 * {example} coalesce(oldValue, newValue, noValue)
+	 * 
+	 */
+	public static String coalesce(String oldValue, String newValue, String noValue, Boolean parentExists) {
+		if (parentExists == false) {
+			return oldValue;
+		}
+    	if (noValue == null) {
+    		if (newValue != null) {
+    			return newValue;
+    		} else {
+    			return oldValue;
+    		}
+    	} else {
+    		if (noValue.equals(newValue)) {
+        		return oldValue;
+        	} else {
+        		return newValue;
+        	}
+    	}
+	}
+	
+    /**
+	 *  
+	 * {Category} CoalesceField
+	 * {talendTypes} String
+	 * {param} Boolean(oldValue) oldValue
+	 * {param} String(newValue) newValue
+	 * {param} String(noValue) noValue
+	 * {example} coalesce(oldValue, newValue, noValue)
+	 * 
+	 */
+	public static Boolean coalesce(Boolean oldValue, String newValue, String noValue) {
+    	if (noValue == null) {
+    		if (newValue != null) {
+    			return "true".equals(newValue);
+    		} else {
+    			return oldValue;
+    		}
+    	} else {
+    		if (noValue.equals(newValue)) {
+        		return oldValue;
+        	} else {
+        		return "true".equals(newValue);
+        	}
+    	}
+	}
+
+	/**
+	 *  
+	 * {Category} CoalesceField
+	 * {talendTypes} Integer
+	 * {param} Integer(oldValue) oldValue
+	 * {param} Integer(newValue) newValue
+	 * {param} Integer(noValue) noValue
+	 * {param} Boolean(parentExists) noValue
+	 * {example} coalesce(oldValue, newValue, noValue)
+	 * 
+	 */
+    public static Integer coalesce(Integer oldValue, Integer newValue, Integer noValue, Boolean parentExists) {
+    	if (parentExists == false) {
+    		return oldValue;
+    	}
+    	if (noValue == null) {
+    		if (newValue != null) {
+    			return newValue;
+    		} else {
+    			return oldValue;
+    		}
+    	} else {
+    		if (noValue.equals(newValue)) {
+        		return oldValue;
+        	} else {
+        		return newValue;
+        	}
+    	}
+    }
+	
+    /**
+	 *  
+	 * {Category} CoalesceField
+	 * {talendTypes} Long
+	 * {param} Long(oldValue) oldValue
+	 * {param} Long(newValue) newValue
+	 * {param} Long(noValue) noValue
+	 * {example} coalesce(oldValue, newValue, noValue)
+	 * 
+	 */
+    public static Long coalesce(Long oldValue, Long newValue, Long noValue) {
+    	if (noValue == null) {
+    		if (newValue != null) {
+    			return newValue;
+    		} else {
+    			return oldValue;
+    		}
+    	} else {
+    		if (noValue.equals(newValue)) {
+        		return oldValue;
+        	} else {
+        		return newValue;
+        	}
+    	}
+    }
+    
+    /**
+	 *  
+	 * {Category} CoalesceField
+	 * {talendTypes} Double
+	 * {param} Double(oldValue) oldValue
+	 * {param} Double(newValue) newValue
+	 * {param} Double(noValue) noValue
+	 * {example} coalesce(oldValue, newValue, noValue)
+	 * 
+	 */
+    public static Double coalesce(Double oldValue, Double newValue, Double noValue) {
+    	if (noValue == null) {
+    		if (newValue != null) {
+    			return newValue;
+    		} else {
+    			return oldValue;
+    		}
+    	} else {
+    		if (noValue.equals(newValue)) {
+        		return oldValue;
+        	} else {
+        		return newValue;
+        	}
+    	}
+    }
+
+    /**
+	 *  
+	 * {Category} CoalesceField
+	 * {talendTypes} BigDecimal
+	 * {param} BigDecimal(oldValue) oldValue
+	 * {param} BigDecimal(newValue) newValue
+	 * {param} BigDecimal(noValue) noValue
+	 * {example} coalesce(oldValue, newValue, noValue)
+	 * 
+	 */
+    public static BigDecimal coalesce(BigDecimal oldValue, BigDecimal newValue, BigDecimal noValue) {
+    	if (noValue == null) {
+    		if (newValue != null) {
+    			return newValue;
+    		} else {
+    			return oldValue;
+    		}
+    	} else {
+    		if (noValue.equals(newValue)) {
+        		return oldValue;
+        	} else {
+        		return newValue;
+        	}
+    	}
+    }
+
+    /**
+  	 * {Category} CoalesceField
+  	 * {talendTypes} Date
+  	 * {param} Date(oldValue) oldValue
+  	 * {param} Date(newValue) newValue
+  	 * {param} Date(noValue) noValue
+  	 * {example} coalesce(oldValue, newValue, noValue)
+  	 * 
+  	 */
+    public static Date coalesce(Date oldValue, Date newValue, Date noValue) {
+    	if (noValue == null) {
+    		throw new IllegalArgumentException("The No-Value replacement cannot be null");
+    	}
+		if (noValue.equals(newValue)) {
+    		return oldValue;
+    	} else {
+    		return newValue;
+    	}
+    }
+    
+    /**
+     * returns the value for missing string attributes
+     * @return missing string value
+     * 
+	 * {Category} CoalesceField
+	 * {talendTypes} String
+	 * {example} getNoValueString()
+     */
+    public static String getNoValueString() {
+    	return NO_VALUE_STRING;
+    }
+    
+    /**
+     * returns the value for missing Integer attributes
+     * @return missing Integer value
+     * 
+	 * {Category} CoalesceField
+	 * {talendTypes} Integer
+	 * {example} getNoValueInt()
+     */
+    public static int getNoValueInt() {
+    	return NO_VALUE_INT;
+    }
+    
+    /**
+     * returns the value for missing Long attributes
+     * @return missing Long value
+     * 
+	 * {Category} CoalesceField
+	 * {talendTypes} Long
+	 * {example} getNoValueLong()
+     */
+    public static long getNoValueLong() {
+    	return NO_VALUE_LONG;
+    }
+    
+    /**
+     * returns the value for missing Double attributes
+     * @return missing Double value
+     * 
+	 * {Category} CoalesceField
+	 * {talendTypes} Double
+	 * {example} getNoValueDouble()
+     */
+    public static Double getNoValueDouble() {
+    	return NO_VALUE_DOUBLE;
+    }
+
+    /**
+     * returns the value for missing Date attributes
+     * @return missing Date
+     * 
+	 * {Category} CoalesceField
+	 * {talendTypes} Date
+	 * {example} getNoValueDate()
+     */
+    public static Date getNoValueDate() {
+    	return NO_VALUE_DATE;
+    }
+
+    /**
+     * returns the value for missing BigDecimal attributes
+     * @return missing BigDecimal
+     * 
+	 * {Category} CoalesceField
+	 * {talendTypes} BigDecimal
+	 * {example} getNoValueDate()
+     */
+    public static BigDecimal getNoValueBigDecimal() {
+    	return NO_VALUE_BIGDECIMAL;
+    }
+    
+    /**
+   	 *  
+   	 * {Category} CoalesceField
+   	 * {talendTypes} Long
+   	 * {param} Long(oldValue) oldValue
+   	 * {param} Long(newValue) newValue
+   	 * {param} Boolean(parentExist) parentExist
+   	 * {example} coalesce(oldValue, newValue, parentExist)
+   	 * 
+   	 */
+    public static Long coalesce(Long oldValue, Long newValue, Boolean parentExists) {
+    	if (parentExists) {
+            if (newValue.equals(NO_VALUE_LONG)) {
+                return oldValue;
+            } else {
+                return newValue;
+            }
+        } else {
+            return oldValue;
+        }
+    }
+
+}

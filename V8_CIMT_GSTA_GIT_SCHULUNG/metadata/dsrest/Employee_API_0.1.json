@@ -1,0 +1,188 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Employee API",
+    "description" : "An API to manage employee records",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://api.example.com/v1"
+  } ],
+  "paths" : {
+    "/employees" : {
+      "get" : {
+        "summary" : "List all employees",
+        "responses" : {
+          "200" : {
+            "description" : "A list of employees",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new employee",
+        "requestBody" : {
+          "description" : "The employee to create",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Employee created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employees/{employee_id}" : {
+      "get" : {
+        "summary" : "Get an employee by ID",
+        "parameters" : [ {
+          "name" : "employee_id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "style" : "simple",
+          "explode" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The employee details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Employee not found"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update an employee by ID",
+        "parameters" : [ {
+          "name" : "employee_id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "style" : "simple",
+          "explode" : false
+        } ],
+        "requestBody" : {
+          "description" : "The employee details to update",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Employee updated successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Employee not found"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete an employee by ID",
+        "parameters" : [ {
+          "name" : "employee_id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "style" : "simple",
+          "explode" : false
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Employee deleted successfully"
+          },
+          "404" : {
+            "description" : "Employee not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Employee" : {
+        "type" : "object",
+        "required" : [ "department", "email", "employee_id", "first_name", "last_name", "salary" ],
+        "properties" : {
+          "employee_id" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 1
+          },
+          "first_name" : {
+            "type" : "string",
+            "example" : "John"
+          },
+          "last_name" : {
+            "type" : "string",
+            "example" : "Doe"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "john.doe@example.com"
+          },
+          "department" : {
+            "type" : "string",
+            "example" : "Sales"
+          },
+          "salary" : {
+            "type" : "number",
+            "format" : "float",
+            "example" : 50000.0
+          }
+        }
+      }
+    }
+  }
+}

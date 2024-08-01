@@ -1,1 +1,70 @@
-[ ]
+[ {
+  "baseItem" : {
+    "id" : "_-8CO4E_PEe-sUJZXPEN6eQ",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "V8_CIMT_GSTA_GIT_SCHULUNG:_Ibd5kE_XEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "V8_CIMT_GSTA_GIT_SCHULUNG:_uOjusFAAEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "_bYfPIE_VEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "property"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_Ibd5kE_XEe-sUJZXPEN6eQ",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_5woAUE_XEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_gLmt8E_XEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "JSONUtil",
+    "version" : "Latest",
+    "type" : "routine"
+  }, {
+    "id" : "NumberUtil",
+    "version" : "Latest",
+    "type" : "routine"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_uOjusFAAEe-sUJZXPEN6eQ",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_5woAUE_XEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_gLmt8E_XEe-sUJZXPEN6eQ",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_gLmt8E_XEe-sUJZXPEN6eQ - employee",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+} ]

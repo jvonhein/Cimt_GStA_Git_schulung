@@ -1,0 +1,157 @@
+package routines;
+
+
+public class CatalogLoad {
+
+	/**
+	 * builds the sysname for catalog load at GVL, is null save (uses StringUtil from Jan Lolling)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {example} bulidSysname("Ein-weites Land! /\") # "ein_weites_land"
+	 */
+	public static String buildSysname(String input) {
+		String s = StringUtil.getNullSaveStr(input).toLowerCase();
+		
+		//remove special chars
+		s = s.trim();
+		s = buildLabel(s);
+		s = StringUtil.replaceGermanUmlauts(s);
+		s = s.replaceAll("[- ]", "_");
+		return s;
+	}
+	
+	/**
+	 * builds the sysname with a sequence if it exceeds 40 chars 
+	 * for catalog load at GVL to MDM, is null save (uses StringUtil from Jan Lolling)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {param} boolean(input) input: Boolean.
+	 * 
+	 * {example} bulidSysname("Ein-weites Land! /\", true) # "ein_weites_land_1"
+	 */
+	public static String buildSysname(String input, Boolean formdm) {
+		String s = StringUtil.getNullSaveStr(input).toLowerCase();
+		Integer rownumber;
+		
+		//remove special chars
+		s = s.trim();
+		s = buildLabel(s);
+		s = StringUtil.replaceGermanUmlauts(s);
+		s = s.replaceAll("[- ]", "_");
+		if(s.length() > 40 && formdm == true){
+			rownumber = Numeric.sequence("buildSysname1", 1, 1);
+			s = s.substring(0, 40 - rownumber.toString().length()-1) + "_" + rownumber.toString();
+		}
+		return s;
+	}
+	
+	/**
+	 * builds the label for catalog load at GVL, is null save (uses StringUtil from Jan Lolling)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {example} bulidLabel("Ein-weites Ländle! /\") # "Ein-weites Ländle"
+	 */
+	public static String buildLabel(String input) {
+		String s = StringUtil.getNullSaveStr(input);
+		Integer rownumber;
+		
+		//remove special chars
+		s = s.trim();
+		s = buildDescription(s);
+		s = s.replaceAll("[\\[\\]()/,.!:;<>|^°\"§$%&/=?´`}{³²+*~#'•…]", ""); 
+		return s;
+	}
+	
+	/**
+	 * builds the label with sequence if it exceeds length of 64 chars
+	 * for catalog load at GVL for MDM load, is null save (uses StringUtil from Jan Lolling)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {param} boolean(input) input: Boolean.
+	 * 
+	 * {example} bulidLabel("Ein-weites Ländle! /\", true) # "Ein-weites Ländle 1"
+	 */
+	public static String buildLabel(String input, Boolean formdm) {
+		String s = StringUtil.getNullSaveStr(input);
+		Integer rownumber;
+		
+		//remove special chars
+		s = s.trim();
+		s = buildDescription(s);
+		s = s.replaceAll("[\\[\\]()/,.!:;<>|^°\"§$%&/=?´`}{³²+*~#'•…]", ""); 
+		if(s.length() > 64 && formdm == true){
+			rownumber = Numeric.sequence("buildLabel1", 1, 1);
+			s = s.substring(0, 64 - rownumber.toString().length()-1) + "_" + rownumber.toString();
+		}
+		return s;
+	}
+	
+	/**
+	 * builds the description for catalog load at GVL, is null save (uses StringUtil from Jan Lolling)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {example} bulidDescription("Ein weites \n\tLand! ") # "Ein weites Land!"
+	 */
+	public static String buildDescription(String input) {
+		String s = StringUtil.getNullSaveStr(input);
+				
+		//remove special chars
+		s = s.trim();
+		s = s.replaceAll("[\\n\\t\'\"]", ""); 
+		if(s.length() > 255){
+			s = s.substring(0, 255);
+		}
+		return s;
+	}
+
+	/**
+	 * builds the sortorder for catalog load at GVL, is null save (uses StringUtil from Jan Lolling)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {example} bulidSortorder("1 .1_2 ") # "112"
+	 */
+	public static String buildSortorder(String input) {
+		String s = StringUtil.getNullSaveStr(input).toLowerCase();
+		
+		//remove special chars
+		s = s.trim();
+		s = s.replaceAll("[., ]", ""); 
+		return s;
+	}
+	
+	/**
+	 * sets foreignkey string for MDM (adds squared brackets)
+	 * 
+	 * {Category} CatalogLoad
+	 * 
+	 * {param} string(input) input: String.
+	 * 
+	 * {example} buildMDMForeignKey("1234---kkkk ") # "[1234---kkkk]"
+	 */
+	public static String buildMDMForeignKey(String input) {
+		String s = StringUtil.getNullSaveStr(input).trim();
+		
+		if(s.length() != 0) {
+			s = "[" + s + "]"; 
+		}
+		return s;
+	}
+}

@@ -1,0 +1,137 @@
+package routines;
+
+import java.util.List;
+import java.util.StringTokenizer;
+
+/*
+ * user specification: the function's comment should contain keys as follows: 1. write about the function's comment.but
+ * it must be before the "{talendTypes}" key.
+ * 
+ * 2. {talendTypes} 's value must be talend Type, it is required . its value should be one of: String, char | Character,
+ * long | Long, int | Integer, boolean | Boolean, byte | Byte, Date, double | Double, float | Float, Object, short |
+ * Short
+ * 
+ * 3. {Category} define a category for the Function. it is required. its value is user-defined .
+ * 
+ * 4. {param} 's format is: {param} <type>[(<default value or closed list values>)] <name>[ : <comment>]
+ * 
+ * <type> 's value should be one of: string, int, list, double, object, boolean, long, char, date. <name>'s value is the
+ * Function's parameter name. the {param} is optional. so if you the Function without the parameters. the {param} don't
+ * added. you can have many parameters for the Function.
+ * 
+ * 5. {example} gives a example for the Function. it is optional.
+ */
+public class StringHandlingExtra {
+
+	
+	/**
+	 * Only the given signs are stay in the string, other are removed
+	 * 
+	 * {talendTypes} String
+	 * 
+	 * {Category} StringHandling
+	 * 
+	 * {param} string("HELLO WORLD!") oldStr: The whole string.
+	 * 
+	 * {example} clearString("HELLO_WORLD!") # HELLO WORLD
+	 */
+	public static String clearString(String value) {
+		// zulässige Zeichen a-zA-Z0-9 und Leerzeichen
+		// alle anderen Zeichen aus value herausfiltern und den 'gereinigten'
+		// Stringwert zurückgeben
+
+		if (value == null) {
+			return "";
+		} else {
+			value = value.toUpperCase();
+		}
+		return value.replaceAll("[^a-zA-Z0-9\\s]", "");
+	}
+	/**
+	 * A uppercase String are modified to first char to upper- an other char to lower-case.
+	 * Delimiter are: " ", "_", "/", "-"
+	 * 
+	 * {talendTypes} String
+	 * 
+	 * {Category} StringHandling
+	 * 
+	 * {param} string("HELLO WORLD!") oldStr: The whole string.
+	 * 
+	 * 
+	 * {example} CHANGE("HELLO WORLD!) # Hello World
+	 */
+	
+	public static String toTitleCase(String strInput) {
+		// Default delimiter
+		String[] delimiters = { " ", "_", "/", "-","'" };
+		strInput = strInput.toLowerCase();
+		for (String delimiter : delimiters) {
+			StringBuffer stringBuffer = new StringBuffer();
+			if (strInput.contains(delimiter)) {
+				StringTokenizer stringTokenizer = new StringTokenizer(strInput,
+						delimiter);
+				while (stringTokenizer.hasMoreElements()) {
+					String element = stringTokenizer.nextToken();
+					char firstChar = Character.toUpperCase(element.charAt(0));
+					element = firstChar + element.substring(1);
+					stringBuffer.append(element).append(delimiter);
+				}
+				strInput = stringBuffer.deleteCharAt(
+						stringBuffer.length() - 1).toString();
+			}
+		}
+		return strInput;
+	}
+
+	public static String createWhereClauseFromList(Long businessobject_id, String listOfIds) {
+		
+		String whereClause = null;
+		
+		if(businessobject_id != null){
+
+			whereClause = "where businessobject_id = " + businessobject_id;
+			
+		// list of ids:	
+		} else if (listOfIds != null){
+			
+			java.util.List<Long> id_list = new java.util.ArrayList<Long>();
+			for (String s : listOfIds.split(","))
+				id_list.add(Long.parseLong(s));
+
+			if(id_list.size() == 1){
+				whereClause = "where businessobject_id = " + id_list.get(0);
+			} else if (id_list.size() > 1){
+			
+				whereClause = "where businessobject_id in (";
+				for(Long id : id_list){
+					whereClause += id + ",";
+				}
+			
+				// delete the last ','
+				whereClause = whereClause.substring(0, (whereClause.length() - 1));
+			
+				// close the ')'
+				whereClause += ")";
+			}
+		}
+		return whereClause;
+	}
+	
+	public static String combineLists(String list1, String list2) {
+		String res = "";
+		if (StringUtil.isEmpty(list1) && StringUtil.isEmpty(list2)) {
+			return res;
+		} 
+		if (StringUtil.isEmpty(list1) && !StringUtil.isEmpty(list2)) {
+			return list2;
+		}
+		if (!StringUtil.isEmpty(list1) && StringUtil.isEmpty(list2)) {
+			return list1;
+		}
+		if (!StringUtil.isEmpty(list1) && !StringUtil.isEmpty(list2)) {
+			return list1 + list2;
+		}
+		
+		return res;
+	}
+}

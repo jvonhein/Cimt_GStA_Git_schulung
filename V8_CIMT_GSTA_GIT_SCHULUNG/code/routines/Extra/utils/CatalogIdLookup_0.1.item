@@ -1,0 +1,60 @@
+package routines;
+
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class CatalogIdLookup {
+
+    /**
+     * Lookup to the GVL catalog
+     * 
+     * 
+     * {talendTypes} int | Integer
+     * 
+     * {Category} CatalogIdLookup
+     * 
+     * {param} object(globalMap) globalMap: reference to globalMap.
+     * 
+     * {param} string("sysname") sysname: der Sysname
+     * 
+     * {param} string("metaSysname") metaSysname: der MetaSysname
+     * 
+     * {example} getId(globalMap, "sysname", "metaSysname") # 234
+     */
+    public static Integer getId(Map<String, Object> globalMap, String sysname, String metaSysname) {
+    	if (sysname == null) {
+    		return null;
+    	} else if (sysname.equals(CoalesceField.getNoValueString())) {
+    		return CoalesceField.getNoValueInt();
+    	} else if (metaSysname == null || metaSysname.trim().isEmpty()) {
+    		throw new IllegalArgumentException("meta-catalog sysname cannot be null or empty!");
+    	} else {
+    		String metaKey = "0" + metaSysname.toLowerCase();
+    		Integer metaCatalogId = (Integer) globalMap.get(metaKey);
+    		if (metaCatalogId == null) {
+    			throw new IllegalArgumentException("Meta-Catalog '" + metaSysname + "' does not exist!");
+    		} else {
+    			String key = String.valueOf(metaCatalogId) + sysname.trim().toLowerCase();
+    			Integer catalogId = (Integer) globalMap.get(key);
+    			if (catalogId == null) {
+    				throw new IllegalArgumentException("No such catalog with sysname '" + sysname + "' in meta-catalog '" + metaSysname + "'");
+    			} else {
+    				return catalogId;
+    			}
+    		}
+    	}
+    }
+    
+    public static String getSysname(Map<String, Object> globalMap, int id) {
+    	if (NumberUtil.getNullSaveInt(id) == 0) {
+    		return "";
+    	}
+  		for (Entry e : globalMap.entrySet()) {
+  			if (e.getValue() instanceof Integer && id == (Integer) e.getValue()) {  				
+  				String sysname = ((String) e.getKey()).replaceAll("^\\d+", "");
+  				return sysname;
+  			}
+  		}
+  		throw new IllegalArgumentException("No such catalog with id " + id);
+    }
+}

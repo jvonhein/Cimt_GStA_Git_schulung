@@ -1,0 +1,47 @@
+package routines;
+
+import routines.system.JSONObject;
+
+public class JSONUtil {
+
+    /**
+     * {talendTypes} String
+     * 
+     * {Category} JSONUtil
+     * 
+     * {param} String(key) key
+     * {param} Object(value) value
+     * {example} stringToJSON("errorMessage", "database error") {"errorMessage":"database error"}
+     * @throws Exception 
+     */
+    public static String stringToJSON(String key, Object value) throws Exception {
+    	
+    	JSONObject jsonObject = new JSONObject();
+    	
+        jsonObject.put(key, value == null ? JSONObject.NULL : value);
+        
+        return jsonObject.toString();
+    }
+    
+    /**
+     * {talendTypes} String
+     * 
+     * {Category} JSONUtil
+     * 
+     * {param} JSONObject(jsonObject) jsonObject
+     * {param} String(key) key
+     * {param} Object(value) value
+     * {example} StringToJSON("errorMessage", "database error") {"errorMessage":"database error"}
+     * @throws Exception 
+     */
+    public static JSONObject stringToJSON(JSONObject jsonObject, String key, Object value) throws Exception {
+    	
+        if (jsonObject == null) {        	
+            jsonObject = new JSONObject();        
+        }        	
+        
+        jsonObject.put(key, value == null ? JSONObject.NULL : value);       
+        
+        return jsonObject;
+    }
+}
