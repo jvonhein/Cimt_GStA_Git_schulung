@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TalendProperties="http://www.talend.org/properties">
-  <TalendProperties:Project xmi:id="_ZM9nEW5aEe6oU8MQzAcnTg" label="V8_Cimt_GStA_GIT_schulung" description="Schulungsprojekt um die Arbeitsweise mit GIT in Talend zu erläutern" language="java" technicalLabel="V8_CIMT_GSTA_GIT_SCHULUNG" author="_ZM9nEm5aEe6oU8MQzAcnTg" productVersion="Talend Cloud Data Fabric-8.0.1.20231222_1430-patch" url="{&quot;commitLogPattern&quot;:&quot;{0}&quot;,&quot;location&quot;:&quot;git@github.com:jvonhein/Cimt_GStA_Git_schulung.git&quot;,&quot;settings&quot;:&quot;000&quot;,&quot;storage&quot;:&quot;git&quot;}" type="DQ" itemsRelationVersion="1.3" bigData="false">
+  <TalendProperties:Project xmi:id="_ZM9nEW5aEe6oU8MQzAcnTg" label="V8_Cimt_GStA_GIT_schulung" description="Schulungsprojekt um die Arbeitsweise mit GIT in Talend zu erläutern" language="java" technicalLabel="V8_CIMT_GSTA_GIT_SCHULUNG" author="_ZM9nEm5aEe6oU8MQzAcnTg" productVersion="Talend Cloud Data Fabric-8.0.1.20240718_0800-patch" url="{&quot;commitLogPattern&quot;:&quot;{0}&quot;,&quot;location&quot;:&quot;git@github.com:jvonhein/Cimt_GStA_Git_schulung.git&quot;,&quot;settings&quot;:&quot;000&quot;,&quot;storage&quot;:&quot;git&quot;}" type="DQ" itemsRelationVersion="1.3" bigData="false">
     <migrationTask xmi:id="_ZQJd8G5aEe6oU8MQzAcnTg" id="org.talend.repository.model.migration.CheckProductVersionMigrationTask" breaks="7.1.0" version="7.1.1"/>
   </TalendProperties:Project>
   <TalendProperties:User xmi:id="_ZM9nEm5aEe6oU8MQzAcnTg" login="jens.hartwich@cimtagde.nfr" firstName="Jens" lastName="Hartwich" type="DQ"/>
   <TalendProperties:User xmi:id="_n3HuYG5aEe66xL79aD9WWg" login="joscha.vonhein@cimtagde.nfr" firstName="Joscha" lastName="von Hein" type="DQ"/>
+  <TalendProperties:User xmi:id="_eYzYwE_FEe-6qdpF56hEPw" login="kai.swenson@cimtobjectsag_nfr" firstName="Kai" lastName="Swenson" type="DQ"/>
+  <TalendProperties:User xmi:id="_eYzYwU_FEe-6qdpF56hEPw" login="joscha.vonhein@cimtobjectsag_nfr" firstName="Joscha" lastName="von Hein" type="DQ"/>
+  <TalendProperties:User xmi:id="_eYzYwk_FEe-6qdpF56hEPw" login="jens.hartwich@cimtobjectsag_nfr" firstName="Jens" lastName="Hartwich" type="DQ"/>
 </xmi:XMI>
